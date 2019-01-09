@@ -19,24 +19,58 @@ DO NOT use an array and the native push/shift method in your implementation. Use
 class Queue {
   constructor() {
     this._storage = ""; // String Implementation
+    this.count = 0;
   }
-  isEmpty() {}
-  enqueue(value) {}
-  dequeue() {}
-  peek() {}
-  size() {}
+  isEmpty() {
+    return this._storage.length === 0 ? true : false;
+  }
+  enqueue(value) {
+    this._storage +=  "/" + value;
+    return ++this.count;
+  }
+  dequeue() {
+    const dequed = this._storage.slice(0, this._storage.indexOf("/"))
+    this._storage = this._storage.slice(this._storage.indexOf("/") + 1);
+    this.count--;
+    return dequed;
+  }
+  peek() {
+    return this._storage.slice(this._storage.lastIndexOf("/") + 1);
+  }
+  size() {
+    return this.count;
+  }
 }
 
 // Object Implementation
 class Queue {
   constructor() {
     this._storage = {}; // Object Implementation
+    this.startIndex = 0;
+    this.count = 0;
   }
-  isEmpty() {}
-  enqueue(value) {}
-  dequeue() {}
-  peek() {}
-  size() {}
+  isEmpty() {
+    return (this.count - this.startIndex) === 0 ? true : false;
+  }
+  enqueue(value) {
+    this._storage[this.count] = value;
+    return ++this.count;
+  }
+  dequeue() {
+    if (this.count - this.startIndex > 0) {
+      const dequeued = this._storage[this.startIndex];
+      delete this._storage[this.startIndex]
+      this.startIndex++;
+      return dequeued;
+    } else 
+    return "Queue is empty";
+  }
+  peek() {
+    return this._storage[this.count - 1];
+  }
+  size() {
+    return (this.count - this.startIndex);
+  }
 }
 
 /*
@@ -48,6 +82,40 @@ Implement all above methods using Object data type
     queue.contains('hello') - true or false
     3. Write a method named sort() which sorts by value
 */
+
+class Queue {
+  constructor(maxCapacity) {
+    this._storage = {}; // Object Implementation
+    this.startIndex = 0;
+    this.count = 0;
+    this.maxCapacity = maxCapacity;
+  }
+  isEmpty() {
+    return (this.count - this.startIndex) === 0 ? true : false;
+  }
+  enqueue(value) {
+    if (this.count < this.maxCapacity) {
+      this._storage[this.count] = value;
+      return ++this.count;
+    } else
+    return "Max capacity already reached";
+  }
+  dequeue() {
+    if (this.count - this.startIndex > 0) {
+      const dequeued = this._storage[this.startIndex];
+      delete this._storage[this.startIndex]
+      this.startIndex++;
+      return dequeued;
+    } else 
+    return "Queue is empty";
+  }
+  peek() {
+    return this._storage[this.count - 1];
+  }
+  size() {
+    return (this.count - this.startIndex);
+  }
+}
 
 // Use for testing
 // var myQueue = new Queue(3);

@@ -22,11 +22,7 @@ class Stack {
     this._storage = "";
   }
   isEmpty() {
-    if(this._storage.length == 0) {
-      return true;          
-    } else {
-      return false;
-    }
+    return (this._storage.length == 0) ? true : false;    
   }
   push(value) {
     this._storage += "/" + value;
@@ -124,6 +120,13 @@ class Stack {
   }
   size() {
     return this.count;
+  }
+  contains(item) {
+    for(let val of this._storage) {
+      if (val === item)
+      return true;
+    }
+    return false;
   }
 }
 
