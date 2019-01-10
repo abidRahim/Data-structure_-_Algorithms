@@ -122,8 +122,8 @@ class Stack {
     return this.count;
   }
   contains(item) {
-    for(let val of this._storage) {
-      if (val === item)
+    for(let key in this._storage) {
+      if (this._storage[key] == item)
       return true;
     }
     return false;

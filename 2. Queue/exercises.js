@@ -115,6 +115,27 @@ class Queue {
   size() {
     return (this.count - this.startIndex);
   }
+  contains(item) {
+    for(let key in this._storage) {
+      if (this._storage[key] == item)
+      return true;
+    }
+    return false;
+  }
+  until(item) {
+    for(let key in this._storage) {
+      if(this._storage[key] == item)
+      return key;             
+    } 
+	return null;
+  }
+  sort() {
+    let storeVal;
+    for(let key in this._storage) {
+      storeVal += this._storage[key] + ' ';
+    }
+    storeVal.sort();
+  }
 }
 
 // Use for testing
