@@ -121,6 +121,7 @@ class Queue {
       return true;
     }
     return false;
+    return this._storage.hasOwnProperty()
   }
   until(item) {
     for(let key in this._storage) {
@@ -130,11 +131,7 @@ class Queue {
 	return null;
   }
   sort() {
-    let storeVal;
-    for(let key in this._storage) {
-      storeVal += this._storage[key] + ' ';
-    }
-    storeVal.sort();
+    Object.values(this._storage).sort();
   }
 }
 
